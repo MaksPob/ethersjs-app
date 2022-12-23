@@ -1,16 +1,21 @@
-<div class="container-info">
-  <div class="container-account-info">
-    <div>My wallet: {{wallet}}</div>
-    <div *ngIf="transactionCount">Transactions count(nonce): {{transactionCount}}</div>
+<div *ngIf="provider">
+  <div class="container-info">
+    <div class="container-account-info">
+      <div>My wallet: {{wallet}}</div>
+      <div *ngIf="transactionCount">Transactions count(nonce): {{transactionCount}}</div>
+    </div>
+    <div>
+      <button type="button" (click)="approve()">Approve</button>
+    </div>
   </div>
-  <div>
-    <button type="button" (click)="approve()">Approve</button>
+  <div *ngIf="transactionList.length > 0">
+    <ul>Transactions:
+      <li *ngFor="let transaction of transactionList; let i = index">
+        <a href="{{transaction.url}}" target="_blank">{{transaction.label}}</a>
+      </li>
+    </ul>
   </div>
 </div>
-<div *ngIf="transactionList.length > 0">
-  <ul>Transactions:
-    <li *ngFor="let transaction of transactionList; let i = index">
-      <a href="{{transaction.url}}" target="_blank">{{transaction.label}}</a>
-    </li>
-  </ul>
+<div *ngIf="!provider">
+  You must enable MetaMask
 </div>
