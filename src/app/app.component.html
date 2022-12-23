@@ -1,10 +1,10 @@
 <div *ngIf="provider">
   <div class="container-info">
     <div class="container-account-info">
-      <div>My wallet: {{wallet}}</div>
+      <div *ngIf="wallet">My wallet: {{wallet}}</div>
       <div *ngIf="transactionCount">Transactions count(nonce): {{transactionCount}}</div>
     </div>
-    <div>
+    <div *ngIf="wethContract">
       <button type="button" (click)="approve()">Approve</button>
     </div>
   </div>
@@ -16,6 +16,6 @@
     </ul>
   </div>
 </div>
-<div *ngIf="!provider">
-  You must enable MetaMask
+<div *ngIf="!provider || !wallet">
+  You must set up MetaMask
 </div>
